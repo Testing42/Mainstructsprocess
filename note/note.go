@@ -10,10 +10,17 @@ import (
 )
 
 // for marshall to work all the items in struct must be capital
+/* struct tags are meta data
+that can be added to structs below
+so that fields can be given any
+keta data you want be if you don't
+have code that can manage that meta
+data then nothing will happen.
+*/
 type Note struct {
-	Title     string
-	Content   string
-	CreatedAt time.Time
+	Title     string    `json:"title"`
+	Content   string    `json:"content"`
+	CreatedAt time.Time `json:"created_at"`
 }
 
 //this become a method by adding
@@ -22,7 +29,7 @@ type Note struct {
 // that
 
 func (note Note) Display() {
-	fmt.Printf("Your note titled %v has the following content:\n\n%v\n\n", note.title, note.content)
+	fmt.Printf("Your note titled %v has the following content:\n\n%v\n\n", note.Title, note.Content)
 }
 
 func (note Note) Save() error {
