@@ -10,6 +10,21 @@ import (
 	"example.com/go-starting-module/todo"
 )
 
+/*
+below is how you make an interface which allows you to reuse code that is identical without calling it twice.
+inferfaces can't create a logic body
+they are used to define a method exists
+what it can take, and other things like that.
+
+there is a convention in go if 1 interface
+requires only 1 item inside then add er to the end of that interface
+this isn't mandatory but its the convention.
+*/
+
+type saver interface {
+	Save() error
+}
+
 func main() {
 	title, content := getNoteData()
 	todoText := getTodoData()
