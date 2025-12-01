@@ -7,10 +7,31 @@ import (
 	"strings"
 
 	"example.com/go-starting-module/note"
+	"example.com/go-starting-module/todo"
 )
 
 func main() {
 	title, content := getNoteData()
+	todoText := getTodoData()
+
+	todo, err := todo.NewTodo(todoText)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	todo.Display()
+	err = todo.Save()
+
+	if err != nil {
+		fmt.Println("Saving the error failed.")
+		return
+	}
+
+	fmt.Println("Saving the todo succeeded!")
+
+	//above is the todo work and below is the note work
 
 	userNote, err := note.NewNote(title, content)
 
@@ -29,6 +50,11 @@ func main() {
 
 	fmt.Println("Saving the note succeeded!")
 
+}
+
+func getTodoData() string {
+	text := getUserInput("Todo text: ")
+	return text
 }
 
 func getNoteData() (string, string) {
