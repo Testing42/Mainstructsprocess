@@ -37,14 +37,11 @@ func main() {
 	}
 
 	todo.Display()
-	err = todo.Save()
+	err = saveData(todo)
 
 	if err != nil {
-		fmt.Println("Saving the error failed.")
 		return
 	}
-
-	fmt.Println("Saving the todo succeeded!")
 
 	//above is the todo work and below is the note work
 
@@ -56,20 +53,28 @@ func main() {
 	}
 
 	userNote.Display()
-	err = userNote.Save()
+	err = saveData(userNote)
 
 	if err != nil {
-		fmt.Println("Saving the error failed.")
 		return
 	}
-
-	fmt.Println("Saving the note succeeded!")
-
 }
 
 func getTodoData() string {
 	text := getUserInput("Todo text: ")
 	return text
+}
+
+func saveData(data saver) error {
+	err := data.Save()
+
+	if err != nil {
+		fmt.Println("Saving the error failed.")
+		return err
+	}
+
+	fmt.Println("Saving the note succeeded!")
+	return nil
 }
 
 func getNoteData() (string, string) {
